@@ -24,19 +24,40 @@ const images = [
     alt: 'Lighthouse Coast Sea',
   },
 ];
-// Отримуємо посилання на список галереї
-const galleryList = document.querySelector('.gallery');
 
-// Створюємо HTML елементи для всіх зображень
-const galleryItems = images
-  .map(
-    ({ url, alt }) => `
-  <li class="gallery-item">
-    <img src="${url}" alt="${alt}" class="gallery-image">
-  </li>
-`
-  )
-  .join('');
+const createGalleryCard = pictureinfo => {
+  const galleryItemEl = document.createElement('li');
 
-// Додаємо всі елементи в DOM за одну операцію
-galleryList.insertAdjacentHTML('beforeend', galleryItems);
+  galleryItemEl.classList.add('gallery-item');
+
+  const galleryImgEl = document.createElement('img');
+
+  galleryImgEl.classList.add('gallery-image');
+
+  galleryImgEl.src = pictureinfo.url;
+  galleryImgEl.alt = pictureinfo.alt;
+
+  galleryItemEl.append(galleryImgEl);
+  return galleryItemEl;
+};
+
+const galleryCardsArr = images.map(picture => {
+  return createGalleryCard(picture);
+});
+const galleryListEl = document.querySelector('.gallery');
+
+galleryListEl.append(...galleryCardsArr);
+
+// const galleryList = document.querySelector('.gallery');
+
+// const galleryItems = images
+//   .map(
+//     ({ url, alt }) => `
+//   <li class="gallery-item">
+//     <img src="${url}" alt="${alt}" class="gallery-image">
+//   </li>
+// `
+//   )
+//   .join('');
+
+// galleryList.insertAdjacentHTML('beforeend', galleryItems);
