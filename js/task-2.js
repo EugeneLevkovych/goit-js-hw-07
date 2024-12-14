@@ -25,31 +25,34 @@ const images = [
   },
 ];
 
-const createGalleryCard = pictureinfo => {
-  const galleryItemEl = document.createElement('li');
-
-  galleryItemEl.classList.add('gallery-item');
-
-  const galleryImgEl = document.createElement('img');
-
-  galleryImgEl.classList.add('gallery-image');
-
-  galleryImgEl.src = pictureinfo.url;
-  galleryImgEl.alt = pictureinfo.alt;
-
-  galleryItemEl.append(galleryImgEl);
-  return galleryItemEl;
+const createGalleryCard = pictureInfo => {
+  return `<li class="gallery-item">
+  <img src="${pictureInfo.url}" alt="${pictureInfo.alt}" class="gallery-image">
+  </li>`;
 };
-
-const galleryCardsArr = images.map(picture => {
-  return createGalleryCard(picture);
-});
+const galleryCardsTemplate = images
+  .map(picture => createGalleryCard(picture))
+  .join('');
 const galleryListEl = document.querySelector('.gallery');
+galleryListEl.innerHTML = galleryCardsTemplate;
 
-galleryListEl.append(...galleryCardsArr);
+// const createGalleryCard = pictureinfo => {
+//   const galleryItemEl = document.createElement('li');
+//   galleryItemEl.classList.add('gallery-item');
+//   const galleryImgEl = document.createElement('img');
+//   galleryImgEl.classList.add('gallery-image');
+//   galleryImgEl.src = pictureinfo.url;
+//   galleryImgEl.alt = pictureinfo.alt;
+//   galleryItemEl.append(galleryImgEl);
+//   return galleryItemEl;
+// };
+// const galleryCardsArr = images.map(picture => {
+//   return createGalleryCard(picture);
+// });
+// const galleryListEl = document.querySelector('.gallery');
+// galleryListEl.append(...galleryCardsArr);
 
 // const galleryList = document.querySelector('.gallery');
-
 // const galleryItems = images
 //   .map(
 //     ({ url, alt }) => `
@@ -59,5 +62,4 @@ galleryListEl.append(...galleryCardsArr);
 // `
 //   )
 //   .join('');
-
 // galleryList.insertAdjacentHTML('beforeend', galleryItems);
